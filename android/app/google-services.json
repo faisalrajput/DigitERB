@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "768580761370",
+    "firebase_url": "https://topfansdev.firebaseio.com",
+    "project_id": "topfansdev",
+    "storage_bucket": "topfansdev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:768580761370:android:dc66307af1dfce61",
+        "android_client_info": {
+          "package_name": "com.appjust"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "768580761370-i4kckgfrp6umpnl92qc8dubi6llsurgs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.appjust",
+            "certificate_hash": "20eef945c459baf1b685fa76a662f284c3fb18a7"
+          }
+        },
+        {
+          "client_id": "768580761370-qp1kcn3c43un3rt1h96m7taoaim7jfh7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6aUPyyb4jG1MUmZu5rIK7W8019btcNBU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "768580761370-qp1kcn3c43un3rt1h96m7taoaim7jfh7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "768580761370-0tfh0vr37rterc7qb6h0dce66hh971cs.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.appjust"
+              }
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-5140609994114438~9695540046"
+    }
+  ],
+  "configuration_version": "1"
+}

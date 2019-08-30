@@ -1,0 +1,33 @@
+{
+  "name": "appJUST",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "react-native start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "lottie-ios": "3.0.3",
+    "lottie-react-native": "^3.1.0",
+    "react": "16.8.6",
+    "react-native": "0.60.5",
+    "react-native-elements": "^1.1.0",
+    "react-native-firebase": "^5.5.6",
+    "react-native-image-picker": "^1.0.2",
+    "react-native-keyboard-aware-scroll-view": "^0.9.1",
+    "react-native-vector-icons": "^6.6.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/runtime": "^7.5.5",
+    "@react-native-community/eslint-config": "^0.0.5",
+    "babel-jest": "^24.9.0",
+    "eslint": "^6.2.1",
+    "jest": "^24.9.0",
+    "metro-react-native-babel-preset": "^0.56.0",
+    "react-test-renderer": "16.8.6"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
