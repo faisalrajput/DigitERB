@@ -14,7 +14,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import io.invertase.firebase.database.RNFirebaseDatabasePackage; // <-- Add this line
 import io.invertase.firebase.firestore.RNFirebaseFirestorePackage; // <-- Add this line
-
+import io.invertase.firebase.invites.RNFirebaseInvitesPackage; // <-- Add this line
 import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
@@ -34,6 +34,9 @@ public class MainApplication extends Application implements ReactApplication {
       // Firebase database module
       packages.add(new RNFirebaseFirestorePackage()); // <-- Add this line
       packages.add(new RNFirebaseDatabasePackage());
+      packages.add(new RNFirebaseDatabasePackage());
+      packages.add(new RNFirebaseInvitesPackage());
+
       return packages;
     }
 

@@ -5,7 +5,7 @@ import firebase from 'react-native-firebase';
 // import Icon from 'react-native-vector-icons/FontAwesome';
 import {Button, Input} from 'react-native-elements';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-
+import Share from 'react-native-share';
 class Invite extends Component {
   constructor(props) {
     super(props);
@@ -21,6 +21,20 @@ class Invite extends Component {
     this.getReferalCodeThroighEmail();
   }
 
+  componentWillMount() {
+    let url = await firebase.links().getInitialLink();
+    console.log('incoming url', url); 
+    if (url) {
+    const ID = this.getParameterFromUrl(url, "invitedBy");
+    console.log('ID', ID); 
+    }
+   
+  }
+  getParameterFromUrl(url, parm) {
+    var re = new RegExp('.*[?&]' + parm + '=([^&]+)(&|$)');
+    var match = url.match(re);
+    return match ? match[1] : '';
+  }
   getReferalCodeThroighEmail = async () => {
     const usersRef = firebase.firestore().collection('users');
     usersRef.onSnapshot(this.onUsersUpdate);
@@ -54,21 +68,29 @@ class Invite extends Component {
       }
     });
   };
-  share = () => {
-    const {email1, email2, allEmails} = this.state;
-    let chk1 = false;
-    let chk2 = false;
-    allEmails.map(Element => {
-      if ((email1 = Element)) {
-        chk1 = true;
-      } else if (email2 == Element) {
-        chk2 = true;
-      }
-    });
-    if (chk1 && chk2) {
-    } else {
-      this.setState({errorMessage: 'email not exist in database'});
-    }
+
+  sendInvitation = async () => {
+    const SENDER_UID = this.state.ref;
+    //build the link
+    const link = `https://www.topfans.com?invitedBy=${SENDER_UID}`;
+    const title = 'Demo Firebase Invites';
+    const message = 'You have been invite to join the xxxxx app';
+    const invitation = new firebase.invites.Invitation(title, message);
+    invitation.setDeepLink(link);
+    invitation.setCustomImage('');
+    invitation.setCallToActionText('OPEN');
+
+    const invitationIds = await firebase.invites().sendInvitation(invitation);
+
+
+
+const shareOptions = {
+  title: 'Share via',
+  message: 'some message',
+  url: link,
+};
+Share.shareSingle(shareOptions);
+    // Invitation Id's can be used to track additional analytics as you see fit.
   };
 
   render() {
@@ -99,7 +121,7 @@ class Invite extends Component {
             <Text style={{color: 'red'}}>{this.state.errorMessage}</Text>
           )}
           <Button
-            onPress={() => this.share()}
+            onPress={() => this.sendInvitation()}
             disabled={disabled}
             title="share"
           />
