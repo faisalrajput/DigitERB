@@ -14,7 +14,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import io.invertase.firebase.database.RNFirebaseDatabasePackage; // <-- Add this line
 import io.invertase.firebase.firestore.RNFirebaseFirestorePackage; // <-- Add this line
-import io.invertase.firebase.invites.RNFirebaseInvitesPackage; // <-- Add this line
+import io.invertase.firebase.links.RNFirebaseLinksPackage;
 import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
@@ -29,15 +29,19 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       @SuppressWarnings("UnnecessaryLocalVariable")
       List<ReactPackage> packages = new PackageList(this).getPackages();
-      // Packages that cannot be autolinked yet can be added manually here, for example:
+      // Packages that cannot be autolinked yet can be added manually here, for
+      // example:
       // packages.add(new MyReactNativePackage());
       // Firebase database module
       packages.add(new RNFirebaseFirestorePackage()); // <-- Add this line
       packages.add(new RNFirebaseDatabasePackage());
-      packages.add(new RNFirebaseDatabasePackage());
-      packages.add(new RNFirebaseInvitesPackage());
+      packages.add(new RNFirebaseLinksPackage());
 
       return packages;
+      // return Arrays.<ReactPackage>asList(new MainReactPackage(), new (),
+      // new (), new (), new RNFirebasePackage(),
+      // new RNFirebaseLinksPackage() // <-- Add this line
+      // );
     }
 
     @Override

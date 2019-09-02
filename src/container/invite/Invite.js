@@ -22,17 +22,32 @@ class Invite extends Component {
   }
 
   componentWillMount() {
-    let url = await firebase.links().getInitialLink();
-    console.log('incoming url', url); 
+    // firebase
+    //   .links()
+    //   .getInitialLink()
+    //   .then(invitation => {
+    //     console.log('invitation', invitation);
+    //     if (invitation) {
+    //       // app opened from an Invitation
+    //       // Set the rewards points here and update data in your firebase
+    //     } else {
+    //       // app NOT opened from an invitation
+    //       // No rewards for this user
+    //     }
+    //   });
+    let url = firebase.links().getInitialLink();
+    console.log('incoming url', url);
     if (url) {
-    const ID = this.getParameterFromUrl(url, "invitedBy");
-    console.log('ID', ID); 
+      const ID = this.getParameterFromUrl(url, 'invitedBy');
+      console.log('ID', ID);
     }
-   
   }
   getParameterFromUrl(url, parm) {
     var re = new RegExp('.*[?&]' + parm + '=([^&]+)(&|$)');
-    var match = url.match(re);
+
+    console.log('re', re);
+
+    var match = url.equals(re);
     return match ? match[1] : '';
   }
   getReferalCodeThroighEmail = async () => {
@@ -42,7 +57,6 @@ class Invite extends Component {
 
   onUsersUpdate = async querySnapshot => {
     querySnapshot.forEach(doc => {
-      console.log(doc);
       this.state.allEmails.push({
         email: doc._data.user_email,
         ref: doc._data.referralCode,
@@ -54,11 +68,6 @@ class Invite extends Component {
 
     this.setState({email1: email});
     allEmails.filter(Element => {
-      console.log(email);
-      console.log(Element.email);
-
-      console.log(email == Element.email);
-
       if (email == Element.email) {
         this.forceUpdate();
         this.setState({ref: Element.ref, disabled: false});
@@ -69,27 +78,29 @@ class Invite extends Component {
     });
   };
 
-  sendInvitation = async () => {
+  sendInvitation =  () => {
     const SENDER_UID = this.state.ref;
     //build the link
-    const link = `https://www.topfans.com?invitedBy=${SENDER_UID}`;
-    const title = 'Demo Firebase Invites';
-    const message = 'You have been invite to join the xxxxx app';
-    const invitation = new firebase.invites.Invitation(title, message);
-    invitation.setDeepLink(link);
-    invitation.setCustomImage('');
-    invitation.setCallToActionText('OPEN');
+    const link = `https://topfandev.page.link?invitedBy=${SENDER_UID}`;
+    const dynamicLinkDomain = 'https://topfandev.page.link';
+    const DynamicLink = new firebase.links.DynamicLink(link, dynamicLinkDomain);
+    const generatedLink = await firebase.links().createDynamicLink(DynamicLink);
 
-    const invitationIds = await firebase.invites().sendInvitation(invitation);
+    console.log("generatedLink",generatedLink)
+    const INVITATION = 'faisal has invited you to try this app. Use this referral link: ' + link;
+    // const invitation = new firebase.invites.Invitation(title, message);
+    // invitation.setDeepLink(link);
+    // invitation.setCustomImage('');
+    // invitation.setCallToActionText('OPEN');
 
+    // const invitationIds = await firebase.invites().sendInvitation(invitation);
 
-
-const shareOptions = {
-  title: 'Share via',
-  message: 'some message',
-  url: link,
-};
-Share.shareSingle(shareOptions);
+    const shareOptions = {
+      title: 'Share via',
+      message: 'some message',
+      url: generatedLink,
+    };
+    Share.shareSingle(shareOptions);
     // Invitation Id's can be used to track additional analytics as you see fit.
   };
 
