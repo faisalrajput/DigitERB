@@ -22,22 +22,26 @@ class Invite extends Component {
   }
 
   componentWillMount() {
-    firebase
-      .links()
-      .getInitialLink()
-      .then(url => {
-        if (url) {
-          // app opened from a url
-        } else {
-          // app NOT opened from a url
-        }
-      });
-    // let url = firebase.links().getInitialLink();
-    // console.log('incoming url', url);
-    // if (url) {
-    //   const ID = this.getParameterFromUrl(url, 'invitedBy');
-    //   console.log('ID', ID);
-    // }
+    // console.log('componentWillMount');
+
+    // firebase
+    //   .links()
+    //   .getInitialLink()
+    //   .then(url => {
+    //     console.log(url);
+    //     if (url) {
+    //       // app opened from a url
+    //     } else {
+    //       // app NOT opened from a url
+    //     }
+    //   })
+    //   .catch(err => console.log(err));
+    let url = firebase.links().getInitialLink();
+    console.log('incoming url', url);
+    if (url) {
+      const ID = this.getParameterFromUrl(url, 'invitedBy');
+      console.log('ID', ID);
+    }
   }
   getParameterFromUrl(url, parm) {
     var re = new RegExp('.*[?&]' + parm + '=([^&]+)(&|$)');
@@ -69,10 +73,8 @@ class Invite extends Component {
       console.log(email == Element.email);
       if (email == Element.email) {
         this.setState({ref: Element.ref, disabled: false});
-        this.forceUpdate();
-      } else {
-        this.forceUpdate();
-        this.setState({ref: '', disabled: true});
+        // this.forceUpdate();
+        return;
       }
     });
   };
