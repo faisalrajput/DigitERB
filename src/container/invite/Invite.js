@@ -24,32 +24,26 @@ class Invite extends Component {
   componentWillMount() {
     // console.log('componentWillMount');
 
-    // firebase
-    //   .links()
-    //   .getInitialLink()
-    //   .then(url => {
-    //     console.log(url);
-    //     if (url) {
-    //       // app opened from a url
-    //     } else {
-    //       // app NOT opened from a url
-    //     }
-    //   })
-    //   .catch(err => console.log(err));
-    let url = firebase.links().getInitialLink();
-    console.log('incoming url', url);
-    if (url) {
-      const ID = this.getParameterFromUrl(url, 'invitedBy');
-      console.log('ID', ID);
-    }
+    firebase
+      .links()
+      .getInitialLink()
+      .then(url => {
+        console.log(url);
+        if (url) {
+          // app opened from a url
+          const ID = this.getParameterFromUrl(url, 'invitedID');
+          console.log('ID', ID);
+        } else {
+          // app NOT opened from a url
+        }
+      })
+      .catch(err => console.log(err));
   }
-  getParameterFromUrl(url, parm) {
-    var re = new RegExp('.*[?&]' + parm + '=([^&]+)(&|$)');
-
-    console.log('re', re);
-
-    var match = url.match(re);
-    return match ? match[1] : '';
+  getParameterFromUrl(urls, parm) {
+    var url = new URL(urls.toString());
+    console.log(url);
+    var c = url.searchParams.get('invitedId');
+    return c ? c : '';
   }
   getReferalCodeThroighEmail = async () => {
     const usersRef = firebase.firestore().collection('users');
@@ -82,8 +76,8 @@ class Invite extends Component {
   sendInvitation = () => {
     const SENDER_UID = this.state.ref;
     //build the link
-    const link = `https://topfandev.page.link?invitedBy=${SENDER_UID}`;
-    const dynamicLinkDomain = 'https://topfandev.page.link';
+    const link = `https://www.topfan.com/invited?invitedID=${SENDER_UID}`;
+    const dynamicLinkDomain = 'https://topfan.page.link';
     const DynamicLink = new firebase.links.DynamicLink(link, dynamicLinkDomain);
     const generatedLink = firebase.links().createDynamicLink(DynamicLink);
 
