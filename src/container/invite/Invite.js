@@ -83,11 +83,11 @@ class Invite extends Component {
 
     console.log('generatedLink', generatedLink);
     const INVITATION =
-      'faisal has invited you to try this app. Use this referral link: ' + link;
+      'faisal has invited you to try this app. Use this referral link: ';
 
     const shareOptions = {
       title: 'Share',
-      message: 'INVITATION',
+      message: INVITATION,
       url: link,
       social: Share.Social.EMAIL,
     };
