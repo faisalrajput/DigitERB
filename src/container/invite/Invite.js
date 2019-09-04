@@ -84,12 +84,6 @@ class Invite extends Component {
     console.log('generatedLink', generatedLink);
     const INVITATION =
       'faisal has invited you to try this app. Use this referral link: ' + link;
-    // const invitation = new firebase.invites.Invitation(title, message);
-    // invitation.setDeepLink(link);
-    // invitation.setCustomImage('');
-    // invitation.setCallToActionText('OPEN');
-
-    // const invitationIds = await firebase.invites().sendInvitation(invitation);
 
     const shareOptions = {
       title: 'Share',
