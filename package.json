@@ -10,7 +10,7 @@
     "lottie-ios": "3.0.3",
     "lottie-react-native": "^3.1.0",
     "react": "16.8.6",
-    "react-native": "0.60.5",
+    "react-native": "0.62.3",
     "react-native-elements": "^1.1.0",
     "react-native-firebase": "^5.5.6",
     "react-native-image-picker": "^1.0.2",
